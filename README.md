@@ -1,9 +1,9 @@
-<h1 align="center">Welcome to Grafbase-Event-Manager 👋</h1>
+<h1 align="center">Welcome to NodeSphere 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> Event Manager using Grafbase for seamless backend integration
+> Node Manager with GraphQL, AI and Speechly integration
 
 ## Install
 
@@ -17,14 +17,6 @@ npm install
 npm start
 ```
 
-## Run tests
-
-```sh
-npm run test
-```
-## Blog 
-[Blog](https://freakycoders.hashnode.dev/eventify-ai)
-
 ## Author
 
 👤 **Puja and Sandeep**
@@ -35,4 +27,4 @@ npm run test
 Give a ⭐️ if this project helped you!
 
 ***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+_Made with ❤️ for simplified note taking_
