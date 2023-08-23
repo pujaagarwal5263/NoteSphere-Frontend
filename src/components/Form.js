@@ -143,9 +143,8 @@ const Form = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
-        },
+          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
+            },
         body: JSON.stringify({
           query: GetUserQuery,
           variables: {
@@ -186,9 +185,8 @@ const Form = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
-       },
+          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
+              },
         body: JSON.stringify({
           query: NoteCreate,
           variables: {

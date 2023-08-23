@@ -70,8 +70,7 @@ const MyNotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
+          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
         },
         body: JSON.stringify({
           query: GetUserQuery,
@@ -97,8 +96,7 @@ const MyNotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
+          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
         },
         body: JSON.stringify({
           query: userCreate,
@@ -174,8 +172,7 @@ const MyNotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
+          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
         },
         body: JSON.stringify({
           query: GetNotesQuery,
@@ -200,8 +197,7 @@ const MyNotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
+          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
         },
         body: JSON.stringify({
           query: DeleteNotesQuery,
@@ -253,9 +249,8 @@ const MyNotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
-        },
+          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
+           },
         body: JSON.stringify({
           query: NoteUpdate,
           variables: {
@@ -537,7 +532,7 @@ const EditEventModal = ({
       <ModalOverlay />
       <ModalContent
         sx={{
-          background: "linear-gradient(to right,black, #9A2EFE)",
+          background: "black",
           border: "1px solid #363739",
         }}
         color="white"
