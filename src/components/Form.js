@@ -374,9 +374,8 @@ const Form = () => {
                       accept="image/*"
                       onChange={handleImageChange}
                     />
-                    <br />
                     <Button
-                     mb={4}
+                     mt={4}
                      type="button"
                      onClick={getImageURLwithAI}
                      bg="white"

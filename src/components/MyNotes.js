@@ -21,7 +21,12 @@ import {
   ModalBody,
   Divider,
   Avatar,
-  VStack
+  VStack,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from "@chakra-ui/react";
 import { SiMicrosoftonenote } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +70,8 @@ const MyNotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
+          "x-api-key":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
         },
         body: JSON.stringify({
           query: GetUserQuery,
@@ -91,7 +97,8 @@ const MyNotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
+          "x-api-key":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTI3MDkzMjksImlzcyI6ImdyYWZiYXNlIiwiYXVkIjoiMDFIOEVORDY1S0RQUDBZWVA0WFI3RFlBQ1QiLCJqdGkiOiIwMUg4RU5ENktCUzdENVJBMVFFVFBENkpZRCIsImVudiI6InByb2R1Y3Rpb24iLCJwdXJwb3NlIjoicHJvamVjdC1hcGkta2V5In0.Fz8S3SvyA2bYwH-ZeqhcJ9BhgLUtxL_NRPk1l-0vq9Q",
         },
         body: JSON.stringify({
           query: userCreate,
@@ -107,8 +114,6 @@ const MyNotes = () => {
     const result = await response.json();
     return result;
   };
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -183,12 +188,12 @@ const MyNotes = () => {
     );
 
     const result = await response.json();
-    console.log("result for notes",result);
+    console.log("result for notes", result);
     setData(result);
   };
 
   const handleEventID = async (eventID) => {
-    console.log("event ID",eventID);
+    console.log("event ID", eventID);
     const response = await fetch(
       "https://notesphere-main-pujaagarwal5263.grafbase.app/graphql",
       {
@@ -267,7 +272,7 @@ const MyNotes = () => {
     if (result.data != null) {
       console.log("event submitted successfully");
       setIsEditModalOpen(false);
-      fetchNotes()
+      fetchNotes();
     } else {
       console.log(result);
       console.log("error in saving event");
@@ -303,33 +308,42 @@ const MyNotes = () => {
   return (
     <Box bg="black!important">
       <Box px="24px" py="16px" bg="#000000" borderBottom="1px solid #363739">
-      <HStack display="flex" justifyContent="space-between">
-            <Box>
-              <Icon as={SiMicrosoftonenote} h={6} w={6} color="white" mr="8px" />
-              <Text as="b" fontSize="3xl" color="white">
-                NoteSphere
+        <HStack display="flex" justifyContent="space-between">
+          <Box>
+            <Icon as={SiMicrosoftonenote} h={6} w={6} color="white" mr="8px" />
+            <Text as="b" fontSize="3xl" color="white">
+              NoteSphere
+            </Text>
+          </Box>
+          {isAuthenticated && (
+            <Box display="flex" alignItems="center">
+              <Text fontSize="lg" color="white" mr="16px">
+                {user?.name}
               </Text>
+              <Avatar size="sm" mr={2} name={user?.email} src={user?.picture} />
+              <Button onClick={handleGoBack}> Create Notes</Button>
+              <Button onClick={() => logout()} ml="16px">
+                Logout
+              </Button>
             </Box>
-            {isAuthenticated && (
-              <Box display="flex" alignItems="center">
-                <Text fontSize="lg" color="white" mr="16px">
-                  {user?.name}
-                </Text>
-                <Avatar size="sm" mr={2} name={user?.email} src={user?.picture} />
-                <Button onClick={handleGoBack}> Create Notes</Button>
-                <Button onClick={() => logout()} ml="16px">
-                  Logout
-                </Button>
-              </Box>
-            )}
-          </HStack>
+          )}
+        </HStack>
       </Box>
       <Box pl={100} bg="black">
         <Heading color="white" mt={2} mb={1} ml={490}>
           My Notes
         </Heading>
-        <Divider ml={490} w={180} />
-        <VStack>
+     <br />
+        <Tabs align='end' variant='enclosed' width="89%" ml="5%">
+  <TabList>
+    <Tab _selected={{ color: 'white', bg: '#9A2EFE', borderBottom:"2px solid white" }} color="white">All Notes</Tab>
+    <Tab _selected={{ color: 'white', bg: '#9A2EFE', borderBottom:"2px solid white" }} color="white">High</Tab>
+    <Tab _selected={{ color: 'white', bg: '#9A2EFE', borderBottom:"2px solid white" }} color="white">Medium</Tab>
+    <Tab _selected={{ color: 'white', bg: '#9A2EFE', borderBottom:"2px solid white" }} color="white">Low</Tab>
+  </TabList>
+  <TabPanels>
+    <TabPanel>
+    <VStack height="100%" mb="10">
           {data && (
             <>
               {data?.data?.user?.notes?.edges?.map(({ node }) => (
@@ -339,37 +353,160 @@ const MyNotes = () => {
                   borderRadius="lg"
                   p={4}
                   m={2}
+                  marginBottom="5"
                   color="white"
-                  width={{ base: "100%", sm: "45%", md: "30%" }}
+                  width="90%"
                   border="1px solid #363739"
                 >
-                  <HStack>
-                  <Image
-                    src={node.nodeUrl}
-                    alt="Event"
-                    mb={2}
-                    h={300}
-                    w={379}
-                  />
-                  <Box>
-                  <Heading size="md" mb={2}>
-                    {node.name}
-                  </Heading>
-                  <Text mb={2}> {node.description}</Text>
-                  <Text mb={1}>Created At: {formatDate(node.createdAt)}</Text>
-                  {/* <Text mb={1}>Event Date: {node.eventDate}</Text> */}
-                  <Text mb={1}>Priority: {node.priority}</Text>
-                  <Button onClick={() => editEventID(node.id)} mr={4}>
-                    Edit
-                  </Button>
-                  <Button onClick={() => handleEventID(node.id)}>Delete</Button>
-                  </Box>
+                  <HStack spacing={5}>
+                    <Image
+                      src={node.nodeUrl}
+                      alt="Event"
+                      mb={2}
+                      h={300}
+                      w={379}
+                    />
+                     <VStack align="start" spacing={2}>
+                      <Heading size="md" mb={2}>
+                        {node.name}
+                      </Heading>
+                      <Text mb={2} align="start">{node.description}</Text>
+                     <HStack>
+                      <Text mb={1}>
+                      {formatDate(node.createdAt)} &nbsp; | &nbsp;
+                      </Text>
+                      <Text mb={1}>Priority: {node.priority}</Text>
+                      </HStack>
+                      <HStack>
+                      <Button onClick={() => editEventID(node.id)} mr={4}>
+                        Edit
+                      </Button>
+                      <Button onClick={() => handleEventID(node.id)}>
+                        Delete
+                      </Button>
+                      </HStack>
+                    </VStack>
+                   
                   </HStack>
                 </Box>
               ))}
             </>
           )}
         </VStack>
+    </TabPanel>
+    <TabPanel>
+    <VStack height="100vh" mb="10">
+          {data && (
+            <>
+              {data?.data?.user?.notes?.edges?.map(({ node }) => (
+                node.priority == "High" && (
+                <Box
+                  background="linear-gradient(to right,black, #9A2EFE)"
+                  key={node.id}
+                  borderRadius="lg"
+                  p={4}
+                  m={2}
+                  marginBottom="5"
+                  color="white"
+                  width="90%"
+                  border="1px solid #363739"
+                >
+                  <HStack spacing={5}>
+                    <Image
+                      src={node.nodeUrl}
+                      alt="Event"
+                      mb={2}
+                      h={300}
+                      w={379}
+                    />
+                     <VStack align="start" spacing={2}>
+                      <Heading size="md" mb={2}>
+                        {node.name}
+                      </Heading>
+                      <Text mb={2} align="start">{node.description}</Text>
+                    </VStack>
+                  </HStack>
+                </Box>
+                )
+              ))}
+            </>
+          )}
+        </VStack>
+    </TabPanel>
+    <TabPanel>
+    <VStack height="100vh" mb="10">
+          {data && (
+            <>
+              {data?.data?.user?.notes?.edges?.map(({ node }) => (
+                node.priority == "Medium" && (
+                <Box
+                  background="linear-gradient(to right,black, #9A2EFE)"
+                  key={node.id}
+                  borderRadius="lg"
+                  p={4}
+                  m={2}
+                  marginBottom="5"
+                  color="white"
+                  width="90%"
+                  border="1px solid #363739"
+                >
+                  <HStack spacing={5}>
+                    <Image
+                      src={node.nodeUrl}
+                      alt="Event"
+                      mb={2}
+                      h={300}
+                      w={379}
+                    />
+                    <VStack align="start" spacing={2}>
+                      <Heading size="md" mb={2}>
+                        {node.name}
+                      </Heading>
+                      <Text mb={2} align="start">{node.description}</Text>
+                    </VStack>
+                  </HStack>
+                </Box>
+                )
+              ))}
+            </>
+          )}
+        </VStack>
+    </TabPanel>
+    <TabPanel>
+    <VStack height="100vh" mb="10">
+          {data && (
+            <>
+              {data?.data?.user?.notes?.edges?.map(({ node }) => (
+                node.priority == "Low" && (
+                  <Box
+                  background="linear-gradient(to right, black, #9A2EFE)"
+                  key={node.id}
+                  borderRadius="lg"
+                  p={4}
+                  m={2}
+                  marginBottom="5"
+                  color="white"
+                  width="90%"
+                  border="1px solid #363739"
+                >
+                  <HStack spacing={5}>
+                    <Image src={node.nodeUrl} alt="Event" mb={2} h={300} w={379} />
+                    <VStack align="start" spacing={2}>
+                      <Heading size="md" mb={2}>
+                        {node.name}
+                      </Heading>
+                      <Text mb={2} align="start">{node.description}</Text>
+                    </VStack>
+                  </HStack>
+                </Box>
+                )
+              ))}
+            </>
+          )}
+        </VStack>
+    </TabPanel>
+  </TabPanels>
+</Tabs>
       </Box>
 
       {/* Modal for Editing Event */}
@@ -401,7 +538,7 @@ const EditEventModal = ({
       <ModalContent
         sx={{
           background: "linear-gradient(to right,black, #9A2EFE)",
-          border:"1px solid #363739"
+          border: "1px solid #363739",
         }}
         color="white"
         boderRadius="xl"
@@ -445,7 +582,6 @@ const EditEventModal = ({
               ))}
             </Select>
           </FormControl>
-
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" onClick={saveEditedEvent} mr={4}>
