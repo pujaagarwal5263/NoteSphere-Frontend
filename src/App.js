@@ -9,8 +9,6 @@ function App() {
     <ChakraProvider>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/event" element={<Event />} /> */}
-        {/* <Route path="/profile" element={<Dashboard />} /> */}
         <Route path="/form" element={<Form />} />
         <Route path="/MyNotes" element={<MyNotes />} />
         <Route />

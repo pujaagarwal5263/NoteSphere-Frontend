@@ -68,7 +68,6 @@ const Form = () => {
     }));
   };
 
-
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingImage, setisGeneratingImage] = useState(false);
   const generateDescriptionWithAI = async () => {
@@ -143,8 +142,8 @@ const Form = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
-            },
+          "x-api-key": `${process.env.REACT_APP_GRAFBASE_API}`,
+        },
         body: JSON.stringify({
           query: GetUserQuery,
           variables: {
@@ -158,15 +157,13 @@ const Form = () => {
     return result.data?.user?.id;
   };
 
-
   const postEventData = async (formdata, email) => {
-    console.log("object",formData);
+    console.log("object", formData);
     const name = formData.title;
     const description = formData.content;
     const priority = formData.priority;
     const nodeUrl = formData.image;
     const userID = await getUserByEmailID(email);
-   // console.log("userID --",userID);
 
     console.log(
       name,
@@ -185,8 +182,8 @@ const Form = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":`${process.env.REACT_APP_GRAFBASE_API}`,
-              },
+          "x-api-key": `${process.env.REACT_APP_GRAFBASE_API}`,
+        },
         body: JSON.stringify({
           query: NoteCreate,
           variables: {
@@ -194,14 +191,14 @@ const Form = () => {
             description: description,
             priority: priority,
             nodeUrl: nodeUrl,
-            owner: userID
+            owner: userID,
           },
         }),
       }
     );
 
     const result = await response.json();
-    console.log("result",result);
+    console.log("result", result);
     if (result.data != null) {
       console.log("event submitted successfully");
       toast({
@@ -247,15 +244,15 @@ const Form = () => {
     }
   };
 
-  const getImageURLwithAI = async() =>{
+  const getImageURLwithAI = async () => {
     setisGeneratingImage(true);
     const url = `https://api.unsplash.com/search/photos?page=1&query=${formData.title}&w=10&h=10&client_id=2urTmpQD0BBUGv-xV0zemBA7gYevDIpNUBeoNhbGaQA`;
     const response = await axios.get(url);
     const imageURL = response.data.results[0].urls.small;
-    
-    handleInputChange("image",imageURL)
+
+    handleInputChange("image", imageURL);
     setisGeneratingImage(false);
-  }
+  };
 
   const setDescription = () => {
     setDesc("transcript");
@@ -278,18 +275,25 @@ const Form = () => {
         <Box w="30%" p={35} bg="#131313" borderRadius=" 35px 0  0 35px">
           <Box mt={200}>
             <Heading size="xl" ml={30} mb={2} color="white">
-            <Icon as={SiMicrosoftonenote} h={5} w={6} color="white" mr="8px" m={1} />
+              <Icon
+                as={SiMicrosoftonenote}
+                h={5}
+                w={6}
+                color="white"
+                mr="8px"
+                m={1}
+              />
               NoteSphere
             </Heading>
             <Text color="white" ml={63} fontSize={23}>
-            Capturing Thoughts, <br />
-            Creating Possibilities
+              Capturing Thoughts, <br />
+              Creating Possibilities
             </Text>
           </Box>
         </Box>
         <Flex direction="column" w="70%" p={4} bg="#242424">
           <Stack spacing={4}>
-            <Box pl={100} >
+            <Box pl={100}>
               <Box p={4}>
                 <Heading color="white" pb={4}>
                   Craft your Note Details
@@ -310,9 +314,7 @@ const Form = () => {
                     <FormLabel color="white">Content</FormLabel>
                     <Textarea
                       color="white"
-                      value={
-                        transcript != "" ? transcript : formData.content
-                      }
+                      value={transcript != "" ? transcript : formData.content}
                       onChange={(e) =>
                         handleInputChange("content", e.target.value)
                       }
@@ -362,7 +364,7 @@ const Form = () => {
                       ))}
                     </Select>
                   </FormControl>
-                
+
                   <FormControl mb={4}>
                     <FormLabel color="white">Image Upload</FormLabel>
                     <Input
@@ -373,15 +375,15 @@ const Form = () => {
                       onChange={handleImageChange}
                     />
                     <Button
-                     mt={4}
-                     type="button"
-                     onClick={getImageURLwithAI}
-                     bg="white"
-                     >
-                     {isGeneratingImage
-                      ? "Generating..."
-                      : "Fetch Unsplash Image"}
-                      </Button>
+                      mt={4}
+                      type="button"
+                      onClick={getImageURLwithAI}
+                      bg="white"
+                    >
+                      {isGeneratingImage
+                        ? "Generating..."
+                        : "Fetch Unsplash Image"}
+                    </Button>
                     {formData.image && (
                       <Box mt="12px">
                         <Image
